@@ -1,0 +1,105 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+@import "bootstrap";
+
+// :root {
+//     --bs-body-bg: #3465A4;
+// }
+
+*{
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 20px;
+  }
+
+  .navbar-search input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .navbar-search button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Landing Photo styles */
+  .landing-photo {
+    text-align: center;
+    position: relative;
+  }
+
+  .landing-photo img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .landing-photo h1 {
+    font-size: 32px;
+    margin-top: 20px;
+  }
+
+  .landing-photo p {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .landing-buttons {
+    position: absolute;
+    top: 70%;  /* Adjust this as needed */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the div */
+    z-index: 999;
+  }
+
+  .landing-buttons button {
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: 2px solid #007bff;
+    color: #007bff;
+    border-radius: 5px;
+    
+  }
+
+  /* Footer styles */
+  .footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
