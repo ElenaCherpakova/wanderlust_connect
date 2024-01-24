@@ -1,0 +1,36 @@
+<!-- Landing Photo Section -->
+ <% if user_signed_in? %>
+         <%= link_to "View Countries", countries_path, class: "btn btn-light" %>
+ <% else %>
+      <section class="landing-page">
+        <%= image_tag 'landing_photo.png', alt: 'Landing photo', width: '100%' %>
+      <div class="airplane">
+        <%= image_tag 'airplane.png', width: '10%'%>
+  
+</div>
+<div class="airplane-1">
+        <%= image_tag 'boing.png', width: '10%'%>
+        
+</div>
+<div class="balloon balloon-1">
+      <%= image_tag 'balloon.png', width: '100%' %>
+    </div>
+    <div class="balloon balloon-2">
+      <%= image_tag 'balloon.png', width: '100%' %>
+    </div>
+    <!-- Add 4 more balloons -->
+    <div class="balloon balloon-3">
+      <%= image_tag 'balloon.png', width: '100%' %>
+    </div>
+    <div class="balloon balloon-4">
+      <%= image_tag 'balloon.png', width: '60%' %>
+    </div>
+    <div class="balloon balloon-5">
+      <%= image_tag 'balloon.png', width: '70%' %>
+    </div>
+    <div class="balloon balloon-6">
+      <%= image_tag 'balloon.png', width: '70%' %>
+    </div>
+ </section>
+    <% end %>
+ 

@@ -71,3 +71,11 @@ gem "bootstrap", "~> 5.3"
 gem "sassc-rails", "~> 2.1"
 
 gem "jquery-rails", "~> 4.6"
+
+gem "devise", "~> 4.9"
+
+gem "font-awesome-rails", "~> 4.7"
+
+gem "strong_password", "~> 0.0.10"
+
+gem "email_validator", "~> 2.2"

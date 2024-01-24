@@ -15,7 +15,15 @@
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
-
+  <div class="field">
+    <%= form.label :country_id, 'Select a Country' %>
+      <% if city.new_record? %>
+        <%= form.collection_select :country_id, @user_countries, :id, :name, prompt: 'Choose a country' %>
+      <% else %>
+        <%= form.collection_select :country_ids, @user_countries, :id, :name, prompt: 'Choose a country' %>
+      <% end %>
+  </div>
+  
   <div>
     <%= form.submit %>
   </div>

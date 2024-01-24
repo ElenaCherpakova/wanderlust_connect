@@ -32,9 +32,9 @@
   </div>
 
   <div>
-    <%= form.label :city_id, style: "display: block" %>
-    <%= form.text_field :city_id %>
-  </div>
+    <%= form.label :city, 'Select a City' %>
+    <%= form.collection_select :city_id, @user_cities, :id, :name, prompt: 'Select a city' %>  </div>
+ </div>
 
   <div>
     <%= form.submit %>
