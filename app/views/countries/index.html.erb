@@ -1,14 +1,34 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+  <h1 class="display-4 mt-2">Countries</h1>
 
-<h1>Countries</h1>
+  <div id="countries" class="table-responsive mt-3">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @countries.each do |country| %>
+          <tr>
+            <td><%= render country %></td>
+            <td>
+              <%= link_to country, class: 'btn btn-primary' do %>
+                <%= fa_icon 'eye' %> Country
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<div id="countries">
-  <% @countries.each do |country| %>
-    <%= render country %>
-    <p>
-      <%= link_to "Show this country", country %>
-    </p>
+  <%= link_to new_country_path, class: "btn btn-primary" do %>
+    New country
+    <%= fa_icon 'plus' %>
+  <% end %>
+  <%= link_to dashboard_path, class: "btn btn-secondary" do %>
+    <%= fa_icon 'arrow-left' %> To Dashboard
   <% end %>
 </div>
-
-<%= link_to "New country", new_country_path %>

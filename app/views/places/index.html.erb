@@ -1,14 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+  <h1 class="display-4">Places</h1>
+  <div class="row">
+    <% @places.each do |place| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title d-flex">
+              <%= place.name %> 
+              <span class="badge badge-secondary ms-auto" style="color: green;"><%= place.category %></span>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">City of <%= place.city.name %></h6>
+            <p class="card-text">Rating: <%= place.rating %></p>
+            <p class="card-text">Comments: <%= place.comments %></p>
+            <%= link_to "Show this place", place, class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+    <%= link_to dashboard_path, class: "btn btn-secondary" do%>
+  <%= fa_icon 'arrow-left'%> Dashboard
+  <%end%>
+  <%= link_to new_place_path, class: "btn btn-primary" do %>
+  <%= fa_icon 'plus' %> New place
+<% end %>
 
-<h1>Places</h1>
-
-<div id="places">
-  <% @places.each do |place| %>
-    <%= render place %>
-    <p>
-      <%= link_to "Show this place", place %>
-    </p>
-  <% end %>
 </div>
 
-<%= link_to "New place", new_place_path %>
+
+

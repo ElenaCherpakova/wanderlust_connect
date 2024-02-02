@@ -1,10 +1,16 @@
-<h1>Editing city</h1>
-
-<%= render "form", city: @city %>
-
-<br>
-
-<div>
-  <%= link_to "Show this city", @city %> |
-  <%= link_to "Back to cities", cities_path %>
+<div class="container">
+  <h1 class="display-4">Editing city</h1>
+  <div class="row">
+    <div class="col-md-6">
+        <%= render "form", city: @city %>
+    </div>
+    <div>
+      <%= link_to @city, class: "btn btn-primary" do %>
+        <%= fa_icon 'eye' %> City
+      <% end %>
+      <%= link_to cities_path, class: "btn btn-secondary" do %>
+        <%= fa_icon 'arrow-left' %> Cities
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -13,22 +13,15 @@
   </head>
 
   <body>
-   <%= render 'shared/navbar' %> <!-- Render the navbar partial -->
-
-    <!-- Landing Photo Section -->
-    <section class="landing-photo">
-      <%= image_tag 'landing_photo.png', alt: 'Landing photo', width: '100%' %>
-      <div class="landing-buttons">
-        <button>Register</button>
-        <button>Login</button>  
-      </div>
-    </section>
-
-    <div class="container">
+    <div>
+    <%= render 'shared/navbar' %> <!-- Render the navbar partial -->
+      <%=render 'layouts/flash'%>
+    <main>
       <%= yield %>
-    </div>
-
+    </main>
     <%= render 'shared/footer' %> <!-- Render the footer partial -->
+    <div>
   </body>
+  
   
 </html>

@@ -1,27 +1,48 @@
-<div id="<%= dom_id place %>">
-  <p>
-    <strong>Name:</strong>
-    <%= place.name %>
-  </p>
+<div id="<%= dom_id place %>" class="card mb-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <h5 class="card-title">Name:</h5>
+      </div>
+      <div class="col-md-9">
+        <p class="card-text"><%= place.name %></p>
+      </div>
+    </div>
 
-  <p>
-    <strong>Category:</strong>
-    <%= place.category %>
-  </p>
+    <div class="row">
+      <div class="col-md-3">
+        <h5 class="card-title">Category:</h5>
+      </div>
+      <div class="col-md-9">
+        <p class="card-text"><%= place.category %></p>
+      </div>
+    </div>
 
-  <p>
-    <strong>Rating:</strong>
-    <%= place.rating %>
-  </p>
+    <div class="row">
+      <div class="col-md-3">
+        <h5 class="card-title">Rating:</h5>
+      </div>
+      <div class="col-md-9">
+        <p class="card-text"><%= place.rating %></p>
+      </div>
+    </div>
 
-  <p>
-    <strong>Comments:</strong>
-    <%= place.comments %>
-  </p>
+    <div class="row">
+      <div class="col-md-3">
+        <h5 class="card-title">Comments:</h5>
+      </div>
+      <div class="col-md-9">
+        <p class="card-text"><%= place.comments %></p>
+      </div>
+    </div>
 
-  <p>
-    <strong>City:</strong>
-    <%= place.city_id %>
-  </p>
-
+    <div class="row">
+      <div class="col-md-3">
+        <h5 class="card-title">City:</h5>
+      </div>
+      <div class="col-md-9">
+        <p class="card-text"><%= place.city.name if place.city %></p>
+      </div>
+    </div>
+  </div>
 </div>

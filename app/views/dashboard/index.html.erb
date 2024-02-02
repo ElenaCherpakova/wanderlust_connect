@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <h1 class="display-4 mt-2">Dashboard</h1>
+
+  <% if @countries.empty? %>
+    <p>No countries added yet. <%= link_to "Add your first country", new_country_path, class: "btn btn-primary" %></p>
+  <% else %>
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Number of Cities</th>
+          <th>Number of Places</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @countries.each do |country| %>
+          <tr>
+            <td><%= country.name %></td>
+            <td>
+              <%= country.cities.count %>
+              <%= link_to country_cities_path(country), class: "btn btn-primary" do %>
+                <%= fa_icon 'eye' %>
+              <% end %>
+              <%= link_to new_city_path, class: "btn btn-primary" do %>
+                City <%= fa_icon 'plus' %>
+              <% end %>
+            </td>
+            <td>
+              <%= country.cities.sum { |city| city.places.count } %>
+              <%= link_to new_place_path, class: "btn btn-primary" do %>
+                New place <%= fa_icon 'plus' %>
+              <% end %>
+            </td>
+            <td class="d-flex justify-content-center">
+              <%= link_to(country_path(country), class: "btn btn-primary mx-1", title: "Edit this country") do %>  
+                <%= fa_icon 'eye' %> Country
+              <% end %>
+              <%= link_to(edit_country_path(country), class: "btn btn-warning mx-1", title: "Edit this country") do %>
+                <%= fa_icon 'edit' %> Edit
+              <% end %>
+              <%= button_to(country_path(country), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mx-1", title: "Delete this country") do %>
+                <%= fa_icon 'trash' %> Destroy
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <%= link_to new_country_path, class: "btn btn-primary" do %>
+    New country
+    <%= fa_icon 'plus' %>
+  <% end %>
+</div>

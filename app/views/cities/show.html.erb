@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @city %>
-
-<div>
-  <%= link_to "Edit this city", edit_city_path(@city) %> |
-  <%= link_to "Back to cities", cities_path %>
-
-  <%= button_to "Destroy this city", @city, method: :delete %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 mt-2">
+      <%= render @city %>
+      <div class="mt-3">
+        <%= link_to(edit_city_path(@city), class: "btn btn-primary btn-icon mb-2", title: "Edit this city") do %>
+          <%= fa_icon 'edit' %> Edit
+        <% end %>
+        <%= link_to(cities_path, class: "btn btn-secondary btn-icon mb-2", title: "Back to cities") do %>
+          <%= fa_icon 'arrow-left' %> Cities
+        <% end %>
+        <%= button_to(@city, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-icon", title: "Destroy this city") do %>
+          <%= fa_icon 'trash' %> Destroy
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
