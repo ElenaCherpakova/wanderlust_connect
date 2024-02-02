@@ -11,12 +11,14 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <div class="col-md-6">
+    <%= form.label :name, style: "display: block", class:"form-label" %>
+    <%= form.text_field :name, class:"form-control" %>
   </div>
-  <div class="field">
-    <%= form.label :country_id, 'Select a Country' %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :country_id, 'Select a Country', class:"form-label" %>
       <% if city.new_record? %>
         <%= form.collection_select :country_id, @user_countries, :id, :name, prompt: 'Choose a country' %>
       <% else %>
@@ -24,7 +26,7 @@
       <% end %>
   </div>
   
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit class: "btn btn-success" %>
   </div>
 <% end %>

@@ -4,9 +4,12 @@ class CitiesController < ApplicationController
   before_action :set_city, only: %i[show edit update destroy]
 
   def index
-    if params[:country_id].present?
-      @country = current_user.countries.find_by(id: params[:country_id])
-
+    # First, check if a country_id is provided in the params
+    country_id = params[:country_id] || session[:last_viewed_country_id]
+  
+    if country_id.present?
+      @country = current_user.countries.find_by(id: country_id)
+  
       if @country
         @cities = @country.cities
       else
@@ -20,7 +23,9 @@ class CitiesController < ApplicationController
 
   # GET /cities/1 or /cities/1.json
   def show
-    
+    if @city.countries.any?
+      session[:last_viewed_country_id] = @city.countries.first.id
+    end
   end
 
   # GET /cities/new
@@ -42,7 +47,7 @@ class CitiesController < ApplicationController
 
     if selected_country.nil?
       flash[:alert] = 'Please select a country first'
-      redirect_to cities_path and return
+      redirect_to new_city_path and return
     end
 
     existing_city = selected_country.cities.find_by(name: @city.name)
@@ -68,11 +73,6 @@ class CitiesController < ApplicationController
 
   # PATCH/PUT /cities/1 or /cities/1.json
   def update
-    selected_country_ids = params[:city][:country_ids] || []
-
-    # Update country associations
-    @city.countries = current_user.countries.where(id: selected_country_ids)
-
     respond_to do |format|
       if @city.update(city_params)
         format.html { redirect_to city_url(@city), notice: 'City was successfully updated.' }

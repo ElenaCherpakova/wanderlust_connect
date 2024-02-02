@@ -1,9 +1,21 @@
+<div class="container-fluid">
+  <div class="card mt-2">
+    <div class="card-body">
+      <h2 class="card-title">Country:</h5>
+      <h3 class="card-text"><%= render @country %></p>
 
-<%= render @country %>
-
-<div>
-  <%= link_to "Edit this country", edit_country_path(@country) %> |
-  <%= link_to "Back to countries", countries_path %>
-
-  <%= button_to "Destroy this country", @country, method: :delete %>
+      <div class="d-flex p-2">
+        <%= link_to(edit_country_path(@country), class: "btn btn-primary", title: "Edit this country") do %>
+          <%= fa_icon 'edit' %> Edit
+        <% end %>
+    
+        <%= button_to(@country, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger ms-2", title: "Delete this country") do %>
+          <%= fa_icon 'trash' %> Destroy
+        <% end %>
+          <%= link_to(countries_path, class: "btn btn-secondary ms-2", title: "Back to countries") do %>
+          <%= fa_icon 'arrow-left' %> Countries
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

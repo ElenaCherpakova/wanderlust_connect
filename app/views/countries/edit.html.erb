@@ -1,10 +1,16 @@
-<h1>Editing country</h1>
+<div class="container-fluid">
+  <h1 class="display-4 mt-2">Editing country</h1>
+  <div class="row">
+    <div class="col-md-8">
+      <%= render "form", country: @country %>
 
-<%= render "form", country: @country %>
+      <%= link_to countries_path, class: "btn btn-secondary" do %>
+        <%= fa_icon 'arrow-left' %> To countries
+      <% end %>
 
-<br>
-
-<div>
-  <%= link_to "Show this country", @country %> |
-  <%= link_to "Back to countries", countries_path %>
+      <%= link_to(country_path(@country), class: "btn btn-primary mx-1", title: "Edit this country") do %>  
+        <%= fa_icon 'eye' %> Country
+      <% end %>
+    </div>
+  </div>
 </div>

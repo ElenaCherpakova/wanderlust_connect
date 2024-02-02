@@ -1,7 +1,12 @@
-<div id="<%= dom_id city %>">
-  <p>
-    <strong>Name:</strong>
-    <%= city.name %>
-  </p>
-
+<div id="<%= dom_id city %>" class="card mt-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 col-sm-4">
+        <h5 class="card-title">Name:</h5>
+      </div>
+      <div class="col-md-6 col-sm-4">
+        <p class="card-text"><%= city.name %></p>
+      </div>
+    </div>
+  </div>
 </div>

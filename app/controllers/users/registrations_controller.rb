@@ -38,23 +38,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  protected
+  # protected
+  private
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[email password])
   end
 
-    # The path used after sign up.
-    def after_sign_up_path_for(resource)
-      dashboard_path # Redirect to the dashboard after sign up
-    end
-  
-    # The path used after sign in.
-    def after_sign_in_path_for(resource)
-      dashboard_path # Redirect to the dashboard after sign in
-    end
-    
+  # The path used after sign up.
+  def after_sign_up_path_for(_resource)
+    dashboard_path # Redirect to the dashboard after sign up
+  end
+
+  # The path used after sign in.
+  def after_sign_in_path_for(_resource)
+    dashboard_path # Redirect to the dashboard after sign in
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
@@ -64,7 +65,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_sign_up_path_for(resource)
   #   super(resource)
   # end
-  
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

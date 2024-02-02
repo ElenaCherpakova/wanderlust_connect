@@ -2,7 +2,7 @@ class PlacesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :authenticate_user!
   before_action :set_place, only: %i[show edit update destroy]
-  before_action :set_user_cities, only: %i[new edit update index]
+  before_action :set_user_cities, only: %i[index create new edit update]
 
   # GET /places or /places.json
   def index
@@ -11,7 +11,7 @@ class PlacesController < ApplicationController
   end
 
   # GET /places/1 or /places/1.json
-  def show
+  def show 
   end
 
   # GET /places/new
@@ -27,6 +27,14 @@ class PlacesController < ApplicationController
   # POST /places or /places.json
   def create
     @place = Place.new(place_params)
+    user_city_ids = @user_cities.map(&:id)
+    unless user_city_ids.include?(@place.city_id)
+      respond_to do |format|
+        format.html { redirect_to new_place_path, alert: 'City is not valid or not accessible.' }
+        format.json { render json: { error: 'City is not valid or not accessible' }, status: :unprocessable_entity }
+        return
+      end
+    end
 
     respond_to do |format|
       if @place.save
