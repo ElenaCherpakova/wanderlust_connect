@@ -4,7 +4,6 @@ class City < ApplicationRecord
   validates :name, presence: true, length: { minimum: 3 }, format: { without: /\d/ }
   validate :unique_name_within_country
 
-
   private
 
   def unique_name_within_country

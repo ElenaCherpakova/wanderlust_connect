@@ -1,9 +1,23 @@
 <div class="container-fluid">
   <h1 class="display-4 mt-2">Dashboard</h1>
-
+    <%= link_to new_country_path, class: "btn btn-primary" do %>
+    New country
+    <%= fa_icon 'plus' %>
+  <% end %>
   <% if @countries.empty? %>
     <p>No countries added yet. <%= link_to "Add your first country", new_country_path, class: "btn btn-primary" %></p>
   <% else %>
+    <div class="d-flex justify-content-end align-items-center">
+      <strong>Sort by:</strong>
+      <div class="d-flex flex-column mx-2">
+        <%= link_to dashboard_path(order: 'asc'), class: "btn btn-link m-0 p-0" do %>
+          <%= fa_icon 'sort-up' %> A-Z
+        <% end %>
+        <%= link_to dashboard_path(order: 'desc'), class: "btn btn-link m-0 p-0" do %>
+          <%= fa_icon 'sort-down' %> Z-A
+        <% end %>
+      </div>
+    </div>
     <table class="table text-center">
       <thead>
         <tr>
@@ -47,10 +61,5 @@
         <% end %>
       </tbody>
     </table>
-  <% end %>
-
-  <%= link_to new_country_path, class: "btn btn-primary" do %>
-    New country
-    <%= fa_icon 'plus' %>
   <% end %>
 </div>

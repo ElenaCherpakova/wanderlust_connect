@@ -50,7 +50,7 @@ class CitiesController < ApplicationController
       redirect_to new_city_path and return
     end
 
-    existing_city = selected_country.cities.find_by(name: @city.name)
+    existing_city = selected_country.cities.where('lower(name) = ?', @city.name.downcase).first
 
     if existing_city
       flash[:alert] = 'A city with the same name already exists in this country.'
@@ -71,19 +71,40 @@ class CitiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cities/1 or /cities/1.json
-  def update
-    respond_to do |format|
-      if @city.update(city_params)
-        format.html { redirect_to city_url(@city), notice: 'City was successfully updated.' }
-        format.json { render :show, status: :ok, location: @city }
-      else
-        @user_countries = current_user.countries
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @city.errors, status: :unprocessable_entity }
+# PATCH/PUT /cities/1 or /cities/1.json
+def update
+  respond_to do |format|
+    selected_country_id = params[:city][:country_id]
+    new_country = current_user.countries.find_by(id: selected_country_id)
+
+    if new_country.nil?
+      flash[:alert] = 'Please select a country first.'
+      redirect_to edit_city_path(@city) and return
+    end
+
+    old_country = @city.countries.first
+
+    if new_country.cities.where.not(id: @city.id).where('lower(name) = ?', city_params[:name].downcase).exists?
+      flash[:alert] = 'A city with the same name already exists in the selected country.'
+      redirect_to edit_city_path(@city) and return
+    end
+
+    if @city.update(city_params)
+      if old_country && old_country.id != new_country.id
+      old_country.cities.delete(@city)
+      new_country.cities << @city
       end
+      format.html { redirect_to city_url(@city), notice: 'City was successfully updated.' }
+      format.json { render :show, status: :ok, location: @city }
+    else
+      @user_countries = current_user.countries
+      format.html { render :edit, status: :unprocessable_entity }
+      format.json { render json: @city.errors, status: :unprocessable_entity }
     end
   end
+end
+
+
 
   # DELETE /cities/1 or /cities/1.json
   def destroy

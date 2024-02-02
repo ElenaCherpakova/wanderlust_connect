@@ -3,7 +3,6 @@ class Country < ApplicationRecord
   has_and_belongs_to_many :cities, join_table: 'countries_cities'
   validates :name, presence: true, length: { minimum: 3 }, format: { without: /\d/ }
   validate :case_insensitive_uniqueness, on: :update
-  DUPLICATE_NAME_ERROR_MESSAGE = 'has already been taken'
   after_destroy :destroy_associated_cities
   before_save :capitalize_name
 
@@ -26,6 +25,6 @@ class Country < ApplicationRecord
 
   def case_insensitive_uniqueness
     existing_country = Country.where("lower(name) = ?", name.downcase).where.not(id: self.id).first
-    errors.add(:name, DUPLICATE_NAME_ERROR_MESSAGE) if existing_country.present?
+    errors.add(:name, 'has already been taken') if existing_country.present?
   end
 end
