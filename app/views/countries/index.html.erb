@@ -1,6 +1,12 @@
 <div class="container-fluid">
   <h1 class="display-4 mt-2">Countries</h1>
-
+  <%= link_to new_country_path, class: "btn btn-primary" do %>
+    New country
+    <%= fa_icon 'plus' %>
+  <% end %>
+  <%= link_to dashboard_path, class: "btn btn-secondary" do %>
+    <%= fa_icon 'arrow-left' %> To Dashboard
+  <% end %>
   <div id="countries" class="table-responsive mt-3">
     <table class="table table-bordered text-center">
       <thead>
@@ -23,12 +29,4 @@
       </tbody>
     </table>
   </div>
-
-  <%= link_to new_country_path, class: "btn btn-primary" do %>
-    New country
-    <%= fa_icon 'plus' %>
-  <% end %>
-  <%= link_to dashboard_path, class: "btn btn-secondary" do %>
-    <%= fa_icon 'arrow-left' %> To Dashboard
-  <% end %>
 </div>

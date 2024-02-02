@@ -7,8 +7,8 @@ class City < ApplicationRecord
   private
 
   def unique_name_within_country
-    if countries.any? { |country| country.cities.where.not(id: id).exists?(name: name) }
-      errors.add(:name, 'A city with the same name already exists in this country.')
-    end
+    return unless countries.any? { |country| country.cities.where.not(id:).exists?(name:) }
+
+    errors.add(:name, 'A city with the same name already exists in this country.')
   end
 end

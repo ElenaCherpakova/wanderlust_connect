@@ -13,9 +13,9 @@
           </thead>
           <tbody>
             <% @cities.each do |city| %>
-              <tr>
+              <tr class="text-center">
                 <td><%= city.name %></td>
-                <td class="text-center">
+                <td>
                   <%= link_to city_path(city), class: 'btn btn-primary' do %>
                     <%= fa_icon 'eye' %> City
                   <% end %>

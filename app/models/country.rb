@@ -6,6 +6,13 @@ class Country < ApplicationRecord
   after_destroy :destroy_associated_cities
   before_save :capitalize_name
 
+  def self.ransackable_associations(auth_object = nil)
+    ["cities", "users"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "id_value", "name", "updated_at"]
+  end
 
   private
 
