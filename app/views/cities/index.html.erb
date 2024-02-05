@@ -11,7 +11,7 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody> 
             <% @cities.each do |city| %>
               <tr class="text-center">
                 <td><%= city.name %></td>
@@ -19,12 +19,18 @@
                   <%= link_to city_path(city), class: 'btn btn-primary' do %>
                     <%= fa_icon 'eye' %> City
                   <% end %>
+                     <%= link_to country_city_places_path(@country, city), class: "btn btn-primary" do %>
+                <%= fa_icon 'eye' %> Places
+              <% end %>
                 </td>
               </tr>
             <% end %>
           </tbody>
         </table>
+    <div class="d-flex justify-content-between align-items-center">
         <%= link_to "New city", new_city_path, class: 'btn btn-success' %>
+        <%== pagy_nav(@pagy)%>
+        </div>
       </div>
     <% else %>
       <div class="text-center">

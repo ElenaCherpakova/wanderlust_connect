@@ -5,7 +5,7 @@ class CountriesController < ApplicationController
   before_action :authenticate_user!
   # GET /countries or /countries.json
   def index
-    @countries = current_user.countries
+    @countries = current_user.countries.order(:name)
   end
 
   # GET /countries/1 or /countries/1.json

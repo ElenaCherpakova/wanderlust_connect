@@ -11,7 +11,7 @@ class CitiesController < ApplicationController
       @country = current_user.countries.find_by(id: country_id)
 
       if @country
-        @cities = @country.cities
+        @pagy, @cities = pagy(@country.cities.order(:name), items: 6)
       else
         flash[:alert] = 'Selected country does not exist or does not belong to you.'
         redirect_to cities_path
@@ -50,17 +50,16 @@ class CitiesController < ApplicationController
       redirect_to new_city_path and return
     end
 
-    existing_city = selected_country.cities.where('lower(name) = ?', @city.name.downcase).first
+    existing_city = selected_country.cities.find_by('LOWER(name) = ?', @city.name.downcase)
 
     if existing_city
       flash[:alert] = 'A city with the same name already exists in this country.'
       redirect_to new_city_path(city_id: @city.id) and return
     end
 
-    @city.countries << selected_country
-
     respond_to do |format|
       if @city.save
+        @city.countries << selected_country
         format.html { redirect_to city_url(@city), notice: 'City was successfully created.' }
         format.json { render :index, status: :created, location: @city }
       else
