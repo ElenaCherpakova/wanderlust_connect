@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="d-flex justify-content-between mt-4 mb-4">
-    <h1 class="display-4">Places</h1>
+    <h1 class="display-4">Places in <%= @city.name %>:</h1>
     <%= search_form_for @q, url: country_city_places_path(@country, @city), method: :get do |f| %>
       <div class="input-group mb-1">
         <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Search by placename...' %>
