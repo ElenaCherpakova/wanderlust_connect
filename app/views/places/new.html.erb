@@ -4,8 +4,7 @@
     <div class="col-md-6">
       <%= render "form", place: @place %>
     </div>
-    <%= link_to places_path, class: "btn btn-primary" do %>
-    <%= fa_icon 'arrow-left' %> Places
-  <% end %>
+       <%= link_to country_city_places_path(@country, @city), class: "btn btn-secondary btn-icon mb-2", title: "Back to places under this city" do %>
+  <%= fa_icon 'arrow-left' %> Places
+<% end %>
   </div>
-</div>

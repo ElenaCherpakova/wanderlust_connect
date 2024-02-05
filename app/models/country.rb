@@ -3,10 +3,16 @@ class Country < ApplicationRecord
   has_and_belongs_to_many :cities, join_table: 'countries_cities'
   validates :name, presence: true, length: { minimum: 3 }, format: { without: /\d/ }
   validate :case_insensitive_uniqueness, on: :update
-  DUPLICATE_NAME_ERROR_MESSAGE = 'has already been taken'
   after_destroy :destroy_associated_cities
   before_save :capitalize_name
 
+  def self.ransackable_associations(auth_object = nil)
+    ["cities", "users"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "id_value", "name", "updated_at"]
+  end
 
   private
 
@@ -26,6 +32,6 @@ class Country < ApplicationRecord
 
   def case_insensitive_uniqueness
     existing_country = Country.where("lower(name) = ?", name.downcase).where.not(id: self.id).first
-    errors.add(:name, DUPLICATE_NAME_ERROR_MESSAGE) if existing_country.present?
+    errors.add(:name, 'has already been taken') if existing_country.present?
   end
 end

@@ -6,12 +6,12 @@ class CitiesController < ApplicationController
   def index
     # First, check if a country_id is provided in the params
     country_id = params[:country_id] || session[:last_viewed_country_id]
-  
+
     if country_id.present?
       @country = current_user.countries.find_by(id: country_id)
-  
+
       if @country
-        @cities = @country.cities
+        @pagy, @cities = pagy(@country.cities.order(:name), items: 6)
       else
         flash[:alert] = 'Selected country does not exist or does not belong to you.'
         redirect_to cities_path
@@ -23,9 +23,9 @@ class CitiesController < ApplicationController
 
   # GET /cities/1 or /cities/1.json
   def show
-    if @city.countries.any?
-      session[:last_viewed_country_id] = @city.countries.first.id
-    end
+    return unless @city.countries.any?
+
+    session[:last_viewed_country_id] = @city.countries.first.id
   end
 
   # GET /cities/new
@@ -50,17 +50,16 @@ class CitiesController < ApplicationController
       redirect_to new_city_path and return
     end
 
-    existing_city = selected_country.cities.find_by(name: @city.name)
+    existing_city = selected_country.cities.find_by('LOWER(name) = ?', @city.name.downcase)
 
     if existing_city
       flash[:alert] = 'A city with the same name already exists in this country.'
       redirect_to new_city_path(city_id: @city.id) and return
     end
 
-    @city.countries << selected_country
-
     respond_to do |format|
       if @city.save
+        @city.countries << selected_country
         format.html { redirect_to city_url(@city), notice: 'City was successfully created.' }
         format.json { render :index, status: :created, location: @city }
       else
@@ -74,7 +73,26 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1 or /cities/1.json
   def update
     respond_to do |format|
+      selected_country_id = params[:city][:country_id]
+      new_country = current_user.countries.find_by(id: selected_country_id)
+
+      if new_country.nil?
+        flash[:alert] = 'Please select a country first.'
+        redirect_to edit_city_path(@city) and return
+      end
+
+      old_country = @city.countries.first
+
+      if new_country.cities.where.not(id: @city.id).where('lower(name) = ?', city_params[:name].downcase).exists?
+        flash[:alert] = 'A city with the same name already exists in the selected country.'
+        redirect_to edit_city_path(@city) and return
+      end
+
       if @city.update(city_params)
+        if old_country && old_country.id != new_country.id
+          old_country.cities.delete(@city)
+          new_country.cities << @city
+        end
         format.html { redirect_to city_url(@city), notice: 'City was successfully updated.' }
         format.json { render :show, status: :ok, location: @city }
       else

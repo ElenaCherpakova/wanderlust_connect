@@ -17,15 +17,12 @@
     <%= form.text_field :name, class:"form-control" %>
   </div>
   </div>
+   
+
   <div class="mb-3">
-    <%= form.label :country_id, 'Select a Country', class:"form-label" %>
-      <% if city.new_record? %>
-        <%= form.collection_select :country_id, @user_countries, :id, :name, prompt: 'Choose a country' %>
-      <% else %>
-        <%= form.collection_select :country_ids, @user_countries, :id, :name, prompt: 'Choose a country' %>
-      <% end %>
+    <%= form.label :country_id, 'Select a Country', class: "form-label" %>
+    <%= form.collection_select :country_id, @user_countries, :id, :name, { prompt: 'Choose a country' } %>
   </div>
-  
   <div class="mb-3">
     <%= form.submit class: "btn btn-success" %>
   </div>

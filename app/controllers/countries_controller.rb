@@ -5,7 +5,7 @@ class CountriesController < ApplicationController
   before_action :authenticate_user!
   # GET /countries or /countries.json
   def index
-    @countries = current_user.countries
+    @pagy, @countries = pagy(current_user.countries.order(:name), items: 6)
   end
 
   # GET /countries/1 or /countries/1.json

@@ -1,9 +1,57 @@
 <div class="container-fluid">
-  <h1 class="display-4 mt-2">Dashboard</h1>
-
   <% if @countries.empty? %>
-    <p>No countries added yet. <%= link_to "Add your first country", new_country_path, class: "btn btn-primary" %></p>
+    <div class="text-center mt-4">
+      <h2>No countries. Please add one.</h2>
+      <div class="mb-3">
+        <%= link_to new_country_path, class: "btn btn-primary" do %>
+          New country
+          <%= fa_icon 'plus' %>
+        <% end %>
+      </div>
+      <%= link_to dashboard_path, class: "btn btn-secondary" do %>
+        <%= fa_icon 'arrow-left' %> To Dashboard
+      <% end %>
+    </div>
   <% else %>
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="display-4 mt-2">Dashboard</h1>
+      <%= search_form_for @q, url: dashboard_path, method: :get do |f| %>
+        <div class="input-group">
+          <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Search by country...' %>
+          <div class="input-group-append">
+            <%= f.submit 'Search', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+        <div class="d-flex justify-content-between align-items-center">
+    <%= link_to new_country_path, class: "btn btn-primary" do %>
+      New country
+      <%= fa_icon 'plus' %>
+    <% end %>
+
+<div class="d-flex align-items-center">
+      <strong>Sort by:</strong>
+        <div class="d-flex flex-column align-items-center mx-2">
+          <%= link_to dashboard_path(order: 'asc', order_by: 'name'), class: "btn btn-link m-0 p-0" do %>
+            <%= fa_icon 'sort-up' %> A-Z
+          <% end %>
+          <%= link_to dashboard_path(order: 'desc', order_by: 'name'), class: "btn btn-link m-0 p-0" do %>
+            <%= fa_icon 'sort-down' %> Z-A
+          <% end %>
+        </div>
+        <div class="d-flex flex-column">
+          <%= link_to dashboard_path(order: 'desc', order_by: 'created_at'), class: "btn btn-link m-0 p-0" do %>
+            <%= fa_icon 'sort-up' %> Newest
+          <% end %>
+          <%= link_to dashboard_path(order: 'asc', order_by: 'created_at'), class: "btn btn-link m-0 p-0" do %>
+            <%= fa_icon 'sort-down' %> Oldest
+          <% end %>
+        </div>
+      </div>
+    </div>
+    </div>
+
     <table class="table text-center">
       <thead>
         <tr>
@@ -16,7 +64,7 @@
       <tbody>
         <% @countries.each do |country| %>
           <tr>
-            <td><%= country.name %></td>
+            <td><%= highlight(country.name, params.dig(:q, :name_cont)) %></td>
             <td>
               <%= country.cities.count %>
               <%= link_to country_cities_path(country), class: "btn btn-primary" do %>
@@ -28,9 +76,7 @@
             </td>
             <td>
               <%= country.cities.sum { |city| city.places.count } %>
-              <%= link_to new_place_path, class: "btn btn-primary" do %>
-                New place <%= fa_icon 'plus' %>
-              <% end %>
+
             </td>
             <td class="d-flex justify-content-center">
               <%= link_to(country_path(country), class: "btn btn-primary mx-1", title: "Edit this country") do %>  
@@ -44,13 +90,17 @@
               <% end %>
             </td>
           </tr>
+        
         <% end %>
+
       </tbody>
+  
     </table>
+    <div class="d-flex justify-content-end mx-2">
+          <%== pagy_nav(@pagy)%>
+        </div>
   <% end %>
 
-  <%= link_to new_country_path, class: "btn btn-primary" do %>
-    New country
-    <%= fa_icon 'plus' %>
-  <% end %>
+
+
 </div>

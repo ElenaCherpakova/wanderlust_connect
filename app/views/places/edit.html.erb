@@ -8,7 +8,7 @@
       <%= link_to @place, class: "btn btn-primary" do %>
         <%= fa_icon 'eye' %> Place
       <% end %>
-      <%= link_to places_path, class: "btn btn-primary" do %>
+      <%= link_to country_city_places_path(@country, @city), class: "btn btn-primary" do %>
         <%= fa_icon 'arrow-left' %> Places
       <% end %>
     </div>

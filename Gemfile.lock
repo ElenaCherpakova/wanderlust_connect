@@ -170,6 +170,7 @@ GEM
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (6.4.3)
     popper_js (2.11.8)
     psych (5.1.2)
       stringio
@@ -215,6 +216,10 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.1.0)
+    ransack (4.1.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.6.2)
       psych (>= 4.0.0)
     regexp_parser (2.9.0)
@@ -293,8 +298,10 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails (~> 4.6)
+  pagy (~> 6.4)
   puma (>= 5.0)
   rails (~> 7.1.2)
+  ransack (~> 4.1)
   sassc-rails (~> 2.1)
   selenium-webdriver
   sprockets-rails
