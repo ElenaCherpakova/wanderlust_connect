@@ -6,9 +6,9 @@ class DashboardController < ApplicationController
     order_by_created_at = params[:order] == 'desc' ? 'created_at DESC' : 'created_at ASC'
 
     @pagy, @countries = if params[:order_by] == 'name'
-                          pagy(@q.result(distinct: true).order(order_by_name), items: 6)
+                          pagy(@q.result(distinct: true).order(order_by_name), items: 5)
                         else
-                          pagy(@q.result(distinct: true).order(order_by_created_at), items: 6)
+                          pagy(@q.result(distinct: true).order(order_by_created_at), items: 5)
                         end
   end
 end

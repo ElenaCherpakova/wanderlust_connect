@@ -1,15 +1,12 @@
 <div class="container-fluid">
-  <div class="d-flex justify-content-between mt-4 mb-4">
+  <div class="d-flex justify-content-between mt-4 mb-3">
     <h1 class="display-4">Places in <%= @city.name %>:</h1>
     <%= search_form_for @q, url: country_city_places_path(@country, @city), method: :get do |f| %>
-      <div class="input-group mb-1">
-        <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Search by placename...' %>
+      <div class="input-group">
+        <%= f.search_field :name_or_category_cont, class: 'form-control mb-4', placeholder: 'Name or category...' %>
         <div class="input-group-append">
           <%= f.submit 'Search', class: 'btn btn-primary' %>
         </div>
-      </div>
-      <div class="form-group">
-        <%= f.select :category_eq, options_for_select(Place.distinct.pluck(:category).compact.map { |category| [category, category] }, params[:q]&.[](:category_eq)), { include_blank: 'Filter by category...' }, class: 'form-control' %>
       </div>
     <% end %>
   </div>
@@ -27,7 +24,7 @@
               <h6 class="card-subtitle mb-2 text-muted">City of <%= place.city.name %></h6>
               <p class="card-text">Rating: <%= place.rating %></p>
               <p class="card-text">Comments: <%= place.comments %></p>
-              <%= link_to "Show this place", country_city_place_path(@country, @city, place), class: "btn btn-primary" %>
+              <%= link_to "View place", country_city_place_path(@country, @city, place), class: "btn btn-primary" %>
             </div>
           </div>
         </div>
@@ -41,12 +38,15 @@
 
   <div class="d-flex justify-content-between mt-4">
     <div>
+       <%= link_to new_place_path(city_id: @city.id, country_id: @country.id), class: "btn btn-primary" do %>
+        <%= fa_icon 'plus' %> New place
+      <% end %>
       <%= link_to dashboard_path, class: "btn btn-secondary" do %>
         <%= fa_icon 'arrow-left' %> Dashboard
       <% end %>
-      <%= link_to new_place_path(city_id: @city.id, country_id: @country.id), class: "btn btn-primary" do %>
-        <%= fa_icon 'plus' %> New place
-      <% end %>
+        <%= link_to(cities_path, class: "btn btn-outline-primary btn-icon", title: "Back to cities") do %>
+          <%= fa_icon 'arrow-left' %> Cities
+        <% end %>
     </div>
     <div>
       <%== pagy_nav(@pagy) %>

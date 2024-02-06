@@ -27,14 +27,13 @@ class PlacesController < ApplicationController
       @country = @city.countries.first # Assuming you want the first country associated with the city
     else
       @country = Country.first
-      @city = @country.cities.first 
+      @city = @country.cities.first
     end
     @place.city = @city
   end
 
   # GET /places/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /places or /places.json
   def create
