@@ -9,7 +9,7 @@
           <%= fa_icon 'edit' %> Edit
         <% end %>
     
-        <%= button_to(@country, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger ms-2", title: "Delete this country") do %>
+        <%= button_to(@country, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-danger ms-2", title: "Delete this country") do %>
           <%= fa_icon 'trash' %> Destroy
         <% end %>
           <%= link_to(countries_path, class: "btn btn-secondary ms-2", title: "Back to countries") do %>

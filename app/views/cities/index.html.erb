@@ -27,10 +27,20 @@
             <% end %>
           </tbody>
         </table>
-    <div class="d-flex justify-content-between align-items-center">
-        <%= link_to "New city", new_city_path, class: 'btn btn-success' %>
-        <%== pagy_nav(@pagy)%>
+          
+    <div class="d-flex align-items-center">
+        <%= link_to new_city_path, class: 'btn btn-primary' do%>
+         <%= fa_icon 'plus' %> New city
+        <%end%>
+  <%= link_to dashboard_path, class: "btn btn-secondary mx-2" do %>
+        <%= fa_icon 'arrow-left' %> Dashboard
+      <% end %>
+     <div class="ms-auto">
+      <%== pagy_nav(@pagy) %>
+     <div>
         </div>
+
+         
       </div>
     <% else %>
       <div class="text-center">

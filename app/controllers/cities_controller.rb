@@ -32,6 +32,7 @@ class CitiesController < ApplicationController
   def new
     @city = City.new
     @user_countries = current_user.countries
+    @country = @user_countries.first
   end
 
   # GET /cities/1/edit
