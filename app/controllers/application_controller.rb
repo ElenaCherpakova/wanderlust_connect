@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   protect_from_forgery with: :null_session
+  
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   # def after_sign_up_path_for(_resource)
   #   dashboard_path

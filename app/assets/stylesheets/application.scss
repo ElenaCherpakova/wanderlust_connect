@@ -86,6 +86,10 @@ main {
     &.next {
       margin-left: 20px;
     }
+    &.prev.disabled,
+    &.next.disabled  {
+      display: none; 
+    }
   }
 }
 

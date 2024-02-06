@@ -83,3 +83,9 @@ gem "email_validator", "~> 2.2"
 gem "ransack", "~> 4.1"
 
 gem "pagy", "~> 6.4"
+
+gem "rspec-rails", "~> 6.1"
+gem "factory_bot_rails", "~> 6.4"
+gem "faker", "~> 3.2"
+gem "rails-controller-testing", "~> 1.0"
+gem "rexml", "~> 3.2"
