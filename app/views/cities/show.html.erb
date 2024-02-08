@@ -3,15 +3,15 @@
     <div class="col-md-6 mt-2">
       <%= render @city %>
       <div class="mt-3">
-        <%= link_to(edit_city_path(@city), class: "btn btn-primary btn-icon mb-2", title: "Edit this city") do %>
+        <%= link_to(edit_country_city_path(@country, @city), class: "btn btn-primary btn-icon mb-2", title: "Edit this city") do %>
           <%= fa_icon 'edit' %> Edit
         <% end %>
-        <%= link_to(cities_path, class: "btn btn-secondary btn-icon mb-2", title: "Back to cities") do %>
+        <%= link_to(country_cities_path(@country), class: "btn btn-secondary btn-icon mb-2", title: "Back to cities") do %>
           <%= fa_icon 'arrow-left' %> Cities
         <% end %>
-        <%= button_to(@city, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-icon", title: "Destroy this city") do %>
-          <%= fa_icon 'trash' %> Delete
-        <% end %>
+       <%= button_to(country_city_path(@country, @city), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-icon", title: "Delete this city") do %>
+  <%= fa_icon 'trash' %> Delete
+<% end %>
       </div>
     </div>
   </div>

@@ -1,20 +1,21 @@
+<% if flash.any? %>
 <% flash.each do |message_type, message| %>
-<div class="alert alert-success alert-dismissible fade show auto-close-alert">
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  <%= content_tag(:div, message) %>
-</div>
+  <div class="alert alert-success alert-dismissible fade show auto-close-alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <%= content_tag(:div, message) %>
+  </div>
 <% end %>
-
+<%end%>
 <script>
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(() => {
-    document.querySelectorAll('.auto-close-alert').forEach(alert => {
-      alert.style.opacity = '0';
-      alert.addEventListener('transitionend', function() {
-        alert.remove();
+  // Wait for the DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+      document.querySelectorAll('.auto-close-alert').forEach(alert => {
+        alert.style.opacity = '0';
+        alert.addEventListener('transitionend', function() {
+          alert.remove();
+        });
       });
-    });
-  }, 3000);
-});
+    }, 3000);
+  });
 </script>

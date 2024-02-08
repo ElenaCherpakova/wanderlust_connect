@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   def index
     @q = current_user.countries.ransack(params[:q])
     order_by_name = params[:order] == 'desc' ? 'name DESC' : 'name ASC'
