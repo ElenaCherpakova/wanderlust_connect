@@ -50,62 +50,69 @@
       </div>
     </div>
 
-  <div class="row">
-    <div class="col-sm-12">
-      <table class="mt-2 table text-center table-bordered table-responsive">
-        <thead>
-          <tr>
-            <th rowspan="2">Country Name</th>
-            <th colspan="2">Cities</th>
-            <th rowspan="2">Qty of Places</th>
-            <th rowspan="2">Actions</th>
-          </tr>
-          <tr>
-            <th>Qty</th>     
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="rows">
-          <% @countries.each do |country| %>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="mt-2 table text-center table-bordered table-responsive">
+          <thead>
             <tr>
-              <td>
-                <%= highlight(country.name, params.dig(:q, :name_cont)) %>
-              </td>
-              <td>
-                <%= country.cities.count %>
-              </td>
-              <td>
-                 <%= link_to country_cities_path(country), class: "btn btn-outline-primary" do %>
-                <%= fa_icon 'eye' %>
-              <% end %>
-            
-                <%= link_to new_country_city_path(country), class: "btn btn-outline-primary" do %>
-                  City <%= fa_icon 'plus' %>
-                <% end %>
-              </td> 
-              <td>
-                <%= country.cities.sum { |city| city.places.count } %>
-              </td>
-              <td class="d-flex justify-content-center">
-                <%= link_to(country_path(country), class: "btn btn-primary mx-1", title: "Edit this country") do %>  
-                  <%= fa_icon 'eye' %> Country
-                <% end %>
-                <%= link_to(edit_country_path(country), class: "btn btn-warning mx-1", title: "Edit this country") do %>
-                  <%= fa_icon 'edit' %> Edit
-                <% end %>
-                <%= button_to(country_path(country), method: :delete, data: {confirm: 'Are you sure?' }, class: "btn btn-danger mx-1", title: "Delete this country") do %>
-                  <%= fa_icon 'trash' %> Delete
-                <% end %>
-              </td>
+              <th rowspan="2">Country Name</th>
+              <th colspan="2">Cities</th>
+              <th colspan="2">Places</th>
+              <th rowspan="2">Actions</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-      
-      <div class="d-flex justify-content-end">
-        <%== pagy_nav(@pagy) if @pagy.next || @pagy.prev %>
+            <tr>
+              <th>Qty</th>     
+              <th>Actions</th>
+              <th>Qty</th>     
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <% @countries.each do |country| %>
+              <tr>
+                <td>
+                  <%= highlight(country.name, params.dig(:q, :name_cont)) %>
+                </td>
+                <td>
+                  <%= country.cities.count %>
+                </td>
+                <td>
+                  <%= link_to country_cities_path(country), class: "btn btn-outline-primary" do %>
+                    <%= fa_icon 'eye' %>
+                  <% end %>
+                  <%= link_to new_country_city_path(country), class: "btn btn-outline-primary" do %>
+                    City <%= fa_icon 'plus' %>
+                  <% end %>
+                </td> 
+                <td>
+                  <%= country.cities.sum { |city| city.places.count } %>
+                </td>
+                <td>
+                  <% country.cities.each do |city| %>
+                    <%= link_to country_city_places_path(country_id: country.id, city_id: city.id), class: "btn btn-outline-primary" do %>
+                      <%= fa_icon 'eye' %> View
+                    <% end %>
+                  <% end %>
+                </td>
+                <td class="d-flex justify-content-center">
+                  <%= link_to(country_path(country), class: "btn btn-primary mx-1", title: "Edit this country") do %>  
+                    <%= fa_icon 'eye' %> Country
+                  <% end %>
+                  <%= link_to(edit_country_path(country), class: "btn btn-warning mx-1", title: "Edit this country") do %>
+                    <%= fa_icon 'edit' %> Edit
+                  <% end %>
+                  <%= button_to(country_path(country), method: :delete, data: {confirm: 'Are you sure?' }, class: "btn btn-danger mx-1", title: "Delete this country") do %>
+                    <%= fa_icon 'trash' %> Delete
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+          <%== pagy_nav(@pagy) if @pagy.next || @pagy.prev %>
+        </div>
       </div>
     </div>
-  </div>
-  <%end%>
+  <% end %>
 </div>

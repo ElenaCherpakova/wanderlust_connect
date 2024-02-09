@@ -11,7 +11,6 @@ class CountriesController < ApplicationController
   # GET /countries/1 or /countries/1.json
   def show
     @country = Country.find(params[:id])
-    
   end
 
   # GET /countries/new
@@ -21,24 +20,13 @@ class CountriesController < ApplicationController
 
   # GET /countries/1/edit
   def create
-    @country = Country.new(country_params)
-    # Check if the country name is blank or too short, or if it already exists.
-    # These checks are now handled by model validations, so this part can be simplified.
+    @country = current_user.countries.create(country_params) # Associate the country with the current_user
 
-    if current_user.countries.where('lower(name) = ?', @country.name.downcase).exists?
-      @country.errors.add(:name, 'already exists in your list')
-      respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @country.errors, status: :unprocessable_entity }
-      end
-    elsif @country.save
-      current_user.countries << @country
-      respond_to do |format|
+    respond_to do |format|
+      if @country.save
         format.html { redirect_to countries_url, notice: 'Country was successfully created.' }
         format.json { render :show, status: :created, location: @country }
-      end
-    else
-      respond_to do |format|
+      else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @country.errors, status: :unprocessable_entity }
       end
@@ -47,6 +35,8 @@ class CountriesController < ApplicationController
 
   # PATCH/PUT /countries/1 or /countries/1.json
   def update
+        @country = Country.find(params[:id])
+
     existing_country = current_user.countries.find_by(name: country_params[:name])
     if existing_country && existing_country != @country
       flash[:alert] = 'A country with the same name already exists in your list.'
@@ -66,6 +56,8 @@ class CountriesController < ApplicationController
 
   # DELETE /countries/1 or /countries/1.json
   def destroy
+    @country = Country.find(params[:id])
+
     @country.destroy!
 
     respond_to do |format|
@@ -78,7 +70,7 @@ class CountriesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_country
-    @country = current_user.countries.find_by(params[:id])
+    @country = current_user.countries.find_by(id: params[:id])
   end
 
   # Only allow a list of trusted parameters through.

@@ -6,12 +6,12 @@ class Country < ApplicationRecord
   after_destroy :destroy_associated_cities
   before_save :capitalize_name
 
-  def self.ransackable_associations(auth_object = nil)
-    ["cities", "users"]
+  def self.ransackable_associations(_auth_object = nil)
+    %w[cities users]
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "id_value", "name", "updated_at"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at id id_value name updated_at]
   end
 
   private
@@ -31,7 +31,9 @@ class Country < ApplicationRecord
   end
 
   def case_insensitive_uniqueness
-    existing_country = Country.where("lower(name) = ?", name.downcase).where.not(id: self.id).first
+    return unless name.present?
+
+    existing_country = Country.where('lower(name) = ?', name.downcase).where.not(id:).first
     errors.add(:name, 'has already been taken') if existing_country.present?
   end
 end

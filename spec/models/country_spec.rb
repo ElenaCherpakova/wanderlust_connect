@@ -24,7 +24,7 @@ RSpec.describe Country, type: :model do
 
     it 'is not valid with duplicate name' do
       FactoryBot.create(:country, name: 'Unique Country')
-      country = FactoryBot.create(:country, name: 'Unique Country')
+      country = FactoryBot.build(:country, name: 'Unique Country')
       expect(country).not_to be_valid
       expect(country.errors[:name]).to include('has already been taken')
     end

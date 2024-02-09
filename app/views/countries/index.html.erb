@@ -23,6 +23,9 @@
               <%= link_to country, class: 'btn btn-primary' do %>
                 <%= fa_icon 'eye' %> Country
               <% end %>
+                <%= link_to country_cities_path(country), class: 'btn btn-primary' do %>
+                <%= fa_icon 'eye' %> City
+              <% end %>
             </td>
           </tr>
         <% end %>
