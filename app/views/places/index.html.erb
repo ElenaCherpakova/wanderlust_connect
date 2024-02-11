@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <div class="d-flex justify-content-between mt-2">
-    <h1 class="display-4">Places in <%= @city.name %>:</h1>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1 class="display-4 mt-2">Places in <%= @city.name %>:</h1>
     <%= search_form_for @q, url: country_city_places_path(@country, @city), method: :get do |f| %>
       <div class="input-group">
-        <%= f.search_field :name_or_category_cont, class: 'form-control mb-4', placeholder: 'Name or category...' %>
+        <%= f.search_field :name_or_category_cont, class: 'form-control', placeholder: 'Name or category...' %>
         <div class="input-group-append">
           <%= f.submit 'Search', class: 'btn btn-primary' %>
         </div>
@@ -46,7 +46,7 @@
     <%= link_to(country_cities_path, class: "btn btn-outline-primary btn-icon", title: "Back to cities") do %>
       <%= fa_icon 'arrow-left' %> Cities
     <% end %>
-    <div class="ms-auto">
+    <div class="ms-auto mt-3">
       <% if @pagy.page > 1 || @pagy.count > 6 %>
         <%== pagy_nav(@pagy) %>
       <% end %>

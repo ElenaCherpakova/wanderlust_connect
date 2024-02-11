@@ -19,7 +19,7 @@ RSpec.describe 'Countries', type: :request do
   describe 'GET countries/:id' do
     it 'render the show page for country' do
       sign_in @current_user
-      country = FactoryBot.create(:country)
+      country = FactoryBot.create(:country, name: 'Unique Country Name')
       get country_path(country)
       expect(response).to be_successful
       expect(response).to render_template('countries/show')
@@ -52,7 +52,7 @@ RSpec.describe 'Countries', type: :request do
     end
   end
   describe 'POST countries with invalid params' do
-    it 'does not create a new country entry and render  the new template' do
+    it 'not create a new country entry and render to the new template' do
       sign_in @current_user
       country_attributes = FactoryBot.attributes_for(:country, name: nil)
 
@@ -77,7 +77,7 @@ RSpec.describe 'Countries', type: :request do
     end
   end
   describe 'PUT country with invalid data' do
-    it 'do not update country entry' do
+    it 'not update country entry' do
       sign_in @current_user
       country = FactoryBot.create(:country, name: 'Unique Country Name')
 
@@ -89,9 +89,9 @@ RSpec.describe 'Countries', type: :request do
   end
 
   describe 'DELETE country record' do
-    it 'delete country record' do
+    it 'delete country record from database' do
       sign_in @current_user
-      country = FactoryBot.create(:country)
+      country = FactoryBot.create(:country, name: "Unique Country Name")
       expect do
         delete country_path(country)
       end.to change(Country, :count).by(-1)

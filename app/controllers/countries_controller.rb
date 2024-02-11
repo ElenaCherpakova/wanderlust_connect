@@ -18,7 +18,7 @@ class CountriesController < ApplicationController
     @country = Country.new
   end
 
-  # GET /countries/1/edit
+  # POST /countries
   def create
     @country = current_user.countries.create(country_params) # Associate the country with the current_user
 
@@ -35,7 +35,7 @@ class CountriesController < ApplicationController
 
   # PATCH/PUT /countries/1 or /countries/1.json
   def update
-        @country = Country.find(params[:id])
+    @country = Country.find(params[:id])
 
     existing_country = current_user.countries.find_by(name: country_params[:name])
     if existing_country && existing_country != @country
@@ -56,10 +56,9 @@ class CountriesController < ApplicationController
 
   # DELETE /countries/1 or /countries/1.json
   def destroy
-    @country = Country.find(params[:id])
+    @country = Country.find_by(id: params[:id])
 
     @country.destroy!
-
     respond_to do |format|
       format.html { redirect_to countries_url, notice: 'Country was successfully destroyed.' }
       format.json { head :no_content }

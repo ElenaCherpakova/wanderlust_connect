@@ -57,14 +57,12 @@
             <tr>
               <th rowspan="2">Country Name</th>
               <th colspan="2">Cities</th>
-              <th colspan="2">Places</th>
+              <th rowspan="2">Qty Places</th>
               <th rowspan="2">Actions</th>
             </tr>
             <tr>
               <th>Qty</th>     
-              <th>Actions</th>
-              <th>Qty</th>     
-              <th>Actions</th>
+              <th>Actions</th> 
             </tr>
           </thead>
           <tbody id="rows">
@@ -87,13 +85,7 @@
                 <td>
                   <%= country.cities.sum { |city| city.places.count } %>
                 </td>
-                <td>
-                  <% country.cities.each do |city| %>
-                    <%= link_to country_city_places_path(country_id: country.id, city_id: city.id), class: "btn btn-outline-primary" do %>
-                      <%= fa_icon 'eye' %> View
-                    <% end %>
-                  <% end %>
-                </td>
+            
                 <td class="d-flex justify-content-center">
                   <%= link_to(country_path(country), class: "btn btn-primary mx-1", title: "Edit this country") do %>  
                     <%= fa_icon 'eye' %> Country
@@ -109,9 +101,7 @@
             <% end %>
           </tbody>
         </table>
-        <div class="d-flex justify-content-end">
           <%== pagy_nav(@pagy) if @pagy.next || @pagy.prev %>
-        </div>
       </div>
     </div>
   <% end %>
