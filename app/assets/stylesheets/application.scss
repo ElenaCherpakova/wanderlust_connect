@@ -13,11 +13,11 @@
  */
 @import 'bootstrap';
 @import 'font-awesome';
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
 :root {
   --footer-bg-color: #f5f5f5;
   --nav-bg-color: #333;
-
   --nav-font-color: #fff;
 }
 
@@ -26,6 +26,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Lato', sans-serif;
+
 }
 
 .parent-container {
@@ -61,6 +63,9 @@ main {
     color: var(--nav-font-color);
     text-decoration: none;
   }
+}
+.nav-item a:hover {
+  color: red;
 }
 
 .navbar-search {
