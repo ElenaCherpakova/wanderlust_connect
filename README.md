@@ -22,7 +22,7 @@ https://wanderlust-connect.onrender.com
 ![Create country](public/create-country.gif)
 #### Create | Edit city
 ![Create city](public/create-city.gif)
-#### Create place
+#### Create | Update place
 ![Create place](public/create-place.gif)
 #### Pagination | Filtration
 ![pagination and filtration](public/pagination.gif)
@@ -45,7 +45,7 @@ https://wanderlust-connect.onrender.com
 
 ## Contributing 🤝
 
-Contributions to the Concert Diary project are welcome! If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue.
+Contributions to the Wanderlust Connect project are welcome! If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue.
 
 ## License 📄
 
