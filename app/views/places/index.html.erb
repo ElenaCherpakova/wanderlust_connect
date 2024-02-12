@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <div class="d-flex justify-content-between mt-4 mb-3">
-    <h1 class="display-4">Places in <%= @city.name %>:</h1>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1 class="display-4 mt-2">Places in <%= @city.name %>:</h1>
     <%= search_form_for @q, url: country_city_places_path(@country, @city), method: :get do |f| %>
       <div class="input-group">
-        <%= f.search_field :name_or_category_cont, class: 'form-control mb-4', placeholder: 'Name or category...' %>
+        <%= f.search_field :name_or_category_cont, class: 'form-control', placeholder: 'Name or category...' %>
         <div class="input-group-append">
           <%= f.submit 'Search', class: 'btn btn-primary' %>
         </div>
@@ -15,13 +15,13 @@
     <% if @places.any? %>
       <% @places.each do |place| %>
         <div class="col-md-4">
-          <div class="card mb-4">
+          <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title d-flex">
                 <%= highlight(place.name, params.dig(:q, :name_cont)) %> 
                 <span class="badge badge-secondary ms-auto" style="color: green;"><%= place.category %></span>
               </h5>
-              <h6 class="card-subtitle mb-2 text-muted">City of <%= place.city.name %></h6>
+              <h6 class="card-subtitle mb-1 text-muted">City of <%= place.city.name %></h6>
               <p class="card-text">Rating: <%= place.rating %></p>
               <p class="card-text">Comments: <%= place.comments %></p>
               <%= link_to "View place", country_city_place_path(@country, @city, place), class: "btn btn-primary" %>
@@ -32,24 +32,24 @@
     <% else %>
       <div class="col-md-12 text-center">
         <p>No places found.</p>
+        <%= link_to new_country_city_place_path(city_id: @city.id, country_id: @country.id), class: "btn btn-primary" do %>
+          <%= fa_icon 'plus' %> New place
+        <% end %>
       </div>
     <% end %>
   </div>
 
-  <div class="d-flex justify-content-between mt-4">
-    <div>
-       <%= link_to new_place_path(city_id: @city.id, country_id: @country.id), class: "btn btn-primary" do %>
-        <%= fa_icon 'plus' %> New place
+  <div class="d-flex align-items-center mb-2">
+    <%= link_to dashboard_path, class: "btn btn-secondary" do %>
+      <%= fa_icon 'arrow-left' %> Dashboard
+    <% end %>
+    <%= link_to(country_cities_path, class: "btn btn-outline-primary btn-icon mx-2", title: "Back to cities") do %>
+      <%= fa_icon 'arrow-left' %> Cities
+    <% end %>
+    <div class="ms-auto mt-3">
+      <% if @pagy.page > 1 || @pagy.count > 6 %>
+        <%== pagy_nav(@pagy) %>
       <% end %>
-      <%= link_to dashboard_path, class: "btn btn-secondary" do %>
-        <%= fa_icon 'arrow-left' %> Dashboard
-      <% end %>
-        <%= link_to(cities_path, class: "btn btn-outline-primary btn-icon", title: "Back to cities") do %>
-          <%= fa_icon 'arrow-left' %> Cities
-        <% end %>
-    </div>
-    <div>
-      <%== pagy_nav(@pagy) %>
     </div>
   </div>
 </div>

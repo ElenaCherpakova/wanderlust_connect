@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  # devise_for :users, path: '', path_names: {
-  #   sign_up: 'sign_up', login: 'sign_in'
-  # }
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+
   devise_for :users,
              controllers: {
                registrations: 'users/registrations',
@@ -9,22 +9,22 @@ Rails.application.routes.draw do
              }
   devise_scope :user do
     get '/users/sign_out' => 'devise/session#destroy'
-  end
 
-  authenticated :user do
-    get 'dashboard', to: 'dashboard#index', as: :dashboard
-    get '', to: 'dashboard#index'
-  end
+    authenticated :user do
+      get 'dashboard', to: 'dashboard#index', as: :dashboard
+      get '', to: 'dashboard#index'
+    end
 
-  resources :countries do
-    resources :cities do
-      resources :places
+    resources :countries do
+      resources :cities do
+        resources :places
+      end
+    end
+
+    unauthenticated :user do
+      get 'dashboard', to: redirect('/users/sign_in')
     end
   end
-
-  resources :countries
-  resources :cities
-  resources :places
 
   # root to: "countries#index"
   root to: 'landing_page#index'

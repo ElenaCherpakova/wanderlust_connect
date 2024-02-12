@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container-fluid">
   <h1 class="display-4">Edit place</h1>
   <div class="row">
     <div class="col-md-6">
       <%= render "form", place: @place %>
     </div>
     <div>
-      <%= link_to @place, class: "btn btn-primary" do %>
+      <%= link_to country_city_places_path(@place), class: "btn btn-primary" do %>
         <%= fa_icon 'eye' %> Place
       <% end %>
       <%= link_to country_city_places_path(@country, @city), class: "btn btn-primary" do %>

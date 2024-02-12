@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="card mt-2">
     <div class="card-body">
-      <h2 class="card-title">Country:</h5>
+      <h2 class="card-title">Country:</h2>
       <h3 class="card-text"><%= render @country %></p>
 
       <div class="d-flex p-2">
@@ -9,8 +9,8 @@
           <%= fa_icon 'edit' %> Edit
         <% end %>
     
-        <%= button_to(@country, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn btn-danger ms-2", title: "Delete this country") do %>
-          <%= fa_icon 'trash' %> Destroy
+        <%= button_to(@country, method: :delete, data: { turbo_confirm: 'Are you sure you want to delete this country?' }, class: "btn btn-danger ms-2", title: "Delete this country") do %>
+          <%= fa_icon 'trash' %> Delete
         <% end %>
           <%= link_to(countries_path, class: "btn btn-secondary ms-2", title: "Back to countries") do %>
           <%= fa_icon 'arrow-left' %> Countries

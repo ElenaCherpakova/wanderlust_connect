@@ -10,7 +10,7 @@
   <%= fa_icon 'arrow-left' %> Places
 <% end %>
 
-        <%= button_to(@place, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-icon", title: "Destroy this place") do %>
+        <%= button_to(country_city_place_path(@country, @city, @place), method: :delete, data: { turbo_confirm: 'Are you sure you want to delete this place?' }, class: "btn btn-danger btn-icon", title: "Destroy this place") do %>
           <%= fa_icon 'trash' %> Delete
         <% end %>
       </div>
