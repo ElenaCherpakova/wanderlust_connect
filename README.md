@@ -2,6 +2,10 @@
 
 Wanderlust Connect: Where your travel dreams take flight. Seamlessly create countries, cities, and places with ratings and comments. Explore the world, share your experiences, and plan your next adventure with ease.
 
+## Link:
+https://wanderlust-connect.onrender.com
+
+
 ## Features
 
 - 📝 User Registration and Authentication: Securely register accounts and log in to access personal travel records.
@@ -10,6 +14,10 @@ Wanderlust Connect: Where your travel dreams take flight. Seamlessly create coun
 - 🗑️ Deleting Travel Entries: Remove entries to keep records relevant.
 - 🔍 Search and Filter: Quickly find entries and apply filters based on name and category.
 - 📄 Pagination: Navigate travel records effortlessly with pagination.
+
+## Screenshots 
+#### Landing page
+![Landing page](public/landing-page.gif)
 
 ## Tech Stack 🛠️
 

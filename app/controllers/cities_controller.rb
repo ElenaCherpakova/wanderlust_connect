@@ -78,7 +78,7 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1 or /cities/1.json
   def update
     @city = City.find(params[:id])
-    old_country = @city.countries
+    old_country = @city.countries.first
 
     selected_country_id = params[:city][:country_id]
     new_country = current_user.countries.find_by(id: selected_country_id)
