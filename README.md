@@ -18,6 +18,14 @@ https://wanderlust-connect.onrender.com
 ## Screenshots 
 #### Landing page
 ![Landing page](public/landing-page.gif)
+#### Create | Edit Country
+![Create country](public/create-country.gif)
+#### Create | Edit city
+![Create city](public/create-city.gif)
+#### Create place
+![Create place](public/create-place.gif)
+#### Pagination | Filtration
+![pagination and filtration](public/pagination.gif)
 
 ## Tech Stack 🛠️
 
