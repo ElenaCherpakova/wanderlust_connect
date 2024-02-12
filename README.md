@@ -49,4 +49,4 @@ Contributions to the Wanderlust Connect project are welcome! If you find any iss
 
 ## License 📄
 
-The Concert Diary project is released under the [MIT License](LICENSE).
+The Wanderlust Connect project is released under the [MIT License](LICENSE).
