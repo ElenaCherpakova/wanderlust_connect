@@ -90,7 +90,7 @@ class CitiesController < ApplicationController
 
     if new_country.cities.where.not(id: @city.id).where('lower(name) = ?', city_params[:name].downcase).exists?
       flash[:alert] = 'A city with the same name already exists in the selected country.'
-      redirect_to edit_city_path(@city) and return
+      redirect_to edit_country_city_path and return
     end
     
     @user_countries = current_user.countries
