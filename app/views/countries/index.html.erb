@@ -1,36 +1,49 @@
 <div class="container-fluid">
   <h1 class="display-4 mt-2">Countries</h1>
-  <%= link_to new_country_path, class: "btn btn-primary" do %>
-    New country
-    <%= fa_icon 'plus' %>
-  <% end %>
-  <%= link_to dashboard_path, class: "btn btn-secondary" do %>
-    <%= fa_icon 'arrow-left' %> To Dashboard
-  <% end %>
-  <div id="countries" class="table-responsive mt-3">
-    <table class="table table-bordered text-center">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @countries.each do |country| %>
+  <% if @countries.any? %>
+    <div id="countries" class="table-responsive mt-3">
+      <table class="table table-bordered text-center">
+        <thead>
           <tr>
-            <td><%= render country %></td>
-            <td>
-              <%= link_to country, class: 'btn btn-primary' do %>
-                <%= fa_icon 'eye' %> Country
-              <% end %>
-                <%= link_to country_cities_path(country), class: 'btn btn-primary' do %>
-                <%= fa_icon 'eye' %> City
-              <% end %>
-            </td>
+            <th>Name</th>
+            <th>Actions</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          <% @countries.each do |country| %>
+            <tr>
+              <td><%= render country %></td>
+              <td>
+                <%= link_to country, class: 'btn btn-primary' do %>
+                  <%= fa_icon 'eye' %> Country
+                <% end %>
+                <%= link_to country_cities_path(country), class: 'btn btn-primary' do %>
+                  <%= fa_icon 'eye' %> City
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex align-items-center">
+      <%= link_to new_country_path, class: "btn btn-primary" do %>
+        New country
+        <%= fa_icon 'plus' %>
+      <% end %>
+      <%= link_to dashboard_path, class: "btn btn-secondary mx-2" do %>
+        <%= fa_icon 'arrow-left' %> To Dashboard
+      <% end %>
+      <div class="ms-auto">
         <%== pagy_nav(@pagy) if @pagy.next || @pagy.prev %>
+      </div>
+    </div>
+  <% else %>
+    <div class="text-center">
+      <p>No countries found.</p>
+      <%= link_to new_country_path, class: "btn btn-primary" do %>
+        <%= fa_icon 'plus' %> Add Country
+      <% end %>
+    </div>
+  <% end %>
 </div>

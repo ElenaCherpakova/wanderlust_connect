@@ -11,38 +11,29 @@
   <% end %>
 
   <div class="mb-3">
-    <div class="col-md-6">
-    <%= form.label :name, style: "display: block", class:"form-label" %>
+    <%= form.label :name, class:"form-label" %>
     <%= form.text_field :name, class:"form-control" %>
-    </div>
   </div>
 
   <div class="mb-3">
-    <div class="col-md-6">
-    <%= form.label :category, style: "display: block", class:"form-label" %>
-    <%= form.text_field :category,  class:"form-control" %>
-    </div>
+    <%= form.label :category, class:"form-label" %>
+    <%= form.text_field :category, class:"form-control" %>
   </div>
 
   <div class="mb-3">
-    <div class="col-md-6">
-    <%= form.label :rating, style: "display: block", class:"form-label" %>
-    <%= form.number_field :rating,  class:"form-control" %>
-    </div>
+    <%= form.label :rating, class:"form-label" %>
+    <%= form.number_field :rating, class:"form-control" %>
   </div>
 
   <div class="mb-3">
-    <div class="col-md-6">
-    <%= form.label :comments, style: "display: block", class:"form-label" %>
-    <%= form.text_area :comments,  class:"form-control" %>
-    </div>
+    <%= form.label :comments, class:"form-label" %>
+    <%= form.text_area :comments, class:"form-control" %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :city, 'Select a City' %>
-    <%= form.collection_select :city_id, @user_cities, :id, :name, prompt: 'Select a city' %>
+    <%= form.label :city_id, 'Select a City' %>
+    <%= form.collection_select :city_id, @user_cities, :id, :name, prompt: 'Select a city', class: "form-select" %>
   </div>
-</div>
 
   <div class="mb-3">
     <%= form.submit class: "btn btn-success" %>

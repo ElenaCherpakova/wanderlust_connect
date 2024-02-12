@@ -32,18 +32,18 @@
     <% else %>
       <div class="col-md-12 text-center">
         <p>No places found.</p>
+        <%= link_to new_country_city_place_path(city_id: @city.id, country_id: @country.id), class: "btn btn-primary" do %>
+          <%= fa_icon 'plus' %> New place
+        <% end %>
       </div>
     <% end %>
   </div>
 
   <div class="d-flex align-items-center mb-2">
-    <%= link_to new_country_city_place_path(city_id: @city.id, country_id: @country.id), class: "btn btn-primary" do %>
-      <%= fa_icon 'plus' %> New place
-    <% end %>
-    <%= link_to dashboard_path, class: "btn btn-secondary mx-2" do %>
+    <%= link_to dashboard_path, class: "btn btn-secondary" do %>
       <%= fa_icon 'arrow-left' %> Dashboard
     <% end %>
-    <%= link_to(country_cities_path, class: "btn btn-outline-primary btn-icon", title: "Back to cities") do %>
+    <%= link_to(country_cities_path, class: "btn btn-outline-primary btn-icon mx-2", title: "Back to cities") do %>
       <%= fa_icon 'arrow-left' %> Cities
     <% end %>
     <div class="ms-auto mt-3">

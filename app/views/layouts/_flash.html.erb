@@ -1,6 +1,6 @@
 <% if flash.any? %>
 <% flash.each do |message_type, message| %>
-  <div class="alert alert-success alert-dismissible fade show auto-close-alert">
+    <div class="alert <%= message_type == 'notice' ? 'alert-success' : 'alert-danger' %> alert-dismissible fade show auto-close-alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <%= content_tag(:div, message) %>
   </div>
@@ -8,7 +8,7 @@
 <%end%>
 <script>
   // Wait for the DOM to be fully loaded
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('turbo:load', function() {
     setTimeout(() => {
       document.querySelectorAll('.auto-close-alert').forEach(alert => {
         alert.style.opacity = '0';

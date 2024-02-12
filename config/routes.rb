@@ -14,15 +14,15 @@ Rails.application.routes.draw do
       get 'dashboard', to: 'dashboard#index', as: :dashboard
       get '', to: 'dashboard#index'
     end
-    
+
+    resources :countries do
+      resources :cities do
+        resources :places
+      end
+    end
+
     unauthenticated :user do
       get 'dashboard', to: redirect('/users/sign_in')
-    end
-  end
-
-  resources :countries do
-    resources :cities do
-      resources :places
     end
   end
 

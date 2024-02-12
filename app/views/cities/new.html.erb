@@ -4,11 +4,11 @@
     <div class="col-md-6">
       <%= render "form", city: @city %>
       <% if @country.present? %>
-        <%= link_to country_cities_path(@country, @city), class: "btn btn-primary" do %>
+        <%= link_to country_cities_path(@country, @city), class: "btn btn-secondary" do %>
           <%= fa_icon 'arrow-left' %> Cities
         <% end %>
       <% else %>
-        <%= link_to cities_path, class: "btn btn-primary" do %>
+        <%= link_to cities_path, class: "btn btn-secondary" do %>
           <%= fa_icon 'arrow-left' %> Cities
         <% end %>
       <% end %>
