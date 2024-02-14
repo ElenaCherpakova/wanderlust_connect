@@ -5,7 +5,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-lg-0">
          <% if user_signed_in? %>
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="<%= dashboard_path %>">Dashboard</a>
@@ -13,15 +13,18 @@
         <%end%>
       </ul>
       </form>
-      <div class="d-flex justify-content-between mt-2 align-items-baseline ">
-        <% if user_signed_in? %>
-          <p>Welcome, <strong><%= current_user.email %></strong>!</p>
-          <%=button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-light ms-2"%>
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-light" %>
-          <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-light mx-2" %>
-        <% end %>
-      </div>
+   <div class="d-flex justify-content-md-between justify-content-between-sm align-items-baseline">
+  <% if user_signed_in? %>
+    <p class="m-0 mr-2">Welcome, <strong><%= current_user.email %></strong>!</p>
+    <div class="ms-md-2 ms-auto mt-2 mt-md-0">
+      <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-light"%>
+    </div>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-light" %>
+    <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light mx-2" %>
+  <% end %>
+</div>
+
     </div>
   </div>
 </nav>
