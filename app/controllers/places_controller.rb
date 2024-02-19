@@ -8,7 +8,7 @@ class PlacesController < ApplicationController
   # GET /places or /places.json
   def index
     @q = Place.where(city: @city).ransack(params[:q])
-    @pagy, @places = pagy(@q.result(distinct: true).order(created_at: :desc), items: 6)
+    @pagy, @places = pagy(@q.result(distinct: true).order(created_at: :desc))
   end
 
   # GET /places/1 or /places/1.json

@@ -85,26 +85,7 @@ main {
 }
 
 .pagination {
-  display: flex;
-  justify-content: flex-end;
-
-  .page {
-    margin-right: 10px;
-    margin-bottom: 10px;
-
-    &.prev {
-      margin-right: 10px;
-    }
-
-    &.next {
-      margin-left: 5px;
-    }
-
-    &.prev.disabled,
-    &.next.disabled {
-      display: none;
-    }
-  }
+  margin-bottom: 0;
 }
 
 .auto-close-alert {

@@ -11,7 +11,7 @@ class CitiesController < ApplicationController
       @country = current_user.countries.find_by(id: country_id)
 
       if @country
-        @pagy, @cities = pagy(@country.cities.order(:name), items: 6)
+        @pagy, @cities = pagy(@country.cities.order(:name))
       else
         flash[:alert] = 'Selected country does not exist or does not belong to you.'
         redirect_to countries_path
