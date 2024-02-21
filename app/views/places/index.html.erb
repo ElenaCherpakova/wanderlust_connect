@@ -52,9 +52,7 @@
       <%= fa_icon 'arrow-left' %> Cities
     <% end %>
     <div class="ms-auto mt-3">
-      <% if @pagy.page > 1 || @pagy.count > 6 %>
-        <%== pagy_nav(@pagy) %>
-      <% end %>
+        <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
     </div>
   </div>
 </div>

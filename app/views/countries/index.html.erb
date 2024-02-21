@@ -35,7 +35,7 @@
         <%= fa_icon 'arrow-left' %> To Dashboard
       <% end %>
       <div class="ms-auto">
-        <%== pagy_nav(@pagy) if @pagy.next || @pagy.prev %>
+        <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
       </div>
     </div>
   <% else %>

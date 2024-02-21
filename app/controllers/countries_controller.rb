@@ -5,7 +5,7 @@ class CountriesController < ApplicationController
   before_action :set_country, only: %i[show edit update destroy]
   # GET /countries or /countries.json
   def index
-    @pagy, @countries = pagy(current_user.countries.order(:name), items: 6)
+    @pagy, @countries = pagy(current_user.countries.order(:name))
   end
 
   # GET /countries/1 or /countries/1.json
